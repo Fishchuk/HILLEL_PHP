@@ -1,7 +1,7 @@
 <?php
-require_once dirname(__DIR__) . 'vendor/autoload.php';
-require_once dirname(__DIR__) . 'config/constans.php';
-require_once  dirname(__DIR__) . 'config/functions.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once dirname(__DIR__) . '/config/constans.php';
+require_once  dirname(__DIR__) . '/config/functions.php';
 
 error_reporting(E_ALL);
 error_reporting(-1);
@@ -9,6 +9,7 @@ ini_set('error_reporting', E_ALL);
 
 
 session_start();
+
 $router = new Core\Router();
 require_once dirname(__DIR__) . '/routes/web.php';
 

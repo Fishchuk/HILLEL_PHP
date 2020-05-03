@@ -37,7 +37,7 @@ class PostsController extends Controller
         $post = new Post();
         $postId = $post->insert($modelData);
 
-        site_redirect("posts/" . $postId);
+        siteRedirect("posts/" . $postId);
     }
 
     public function show(int $id)

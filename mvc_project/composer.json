@@ -1,15 +1,14 @@
 {
-    "name": "admingo/php",
+    "name": "admingo/vendor",
     "require": {
-      "ext-pdo": "*",
+	"ext-pdo": "*",
       "ext-http": "*"
-    },
+	},
 	"autoload": {
         "psr-4": {
 		"App\\": "App/",
 		"Core\\": "Core/"
 		
-		
 		}
-    }
+	}	
 }

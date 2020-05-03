@@ -3,7 +3,7 @@ $router->add('',['controller' => 'HomeController', 'action' => 'index']);
 $router->add('Home', ['controller' => 'HomeController', 'action' => 'index']);
 
 $router->add('login', ['controller' => 'AuthController', 'action' => 'login']);
-$router->add('registration', ['controller' => 'AuthController', 'action' => 'registration']);
+$router->add('registration', ['controller' => 'AuthController', 'action' => 'register']);
 $router->add('auth', ['controller' => 'AuthController', 'action' => 'verify']);
 $router->add('logout', ['controller' => 'AuthController', 'action' => 'logout']);
 

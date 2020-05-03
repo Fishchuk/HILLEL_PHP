@@ -4,12 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd77774c21dc9937ac29ae8a4ad7e29ef
+class ComposerStaticInitc68697e560ccd503a1b2d34bf1ea74f5
 {
     public static $prefixLengthsPsr4 = array (
-        'M' => 
+        'C' => 
         array (
-            'Models\\' => 7,
+            'Core\\' => 5,
         ),
         'A' => 
         array (
@@ -18,9 +18,9 @@ class ComposerStaticInitd77774c21dc9937ac29ae8a4ad7e29ef
     );
 
     public static $prefixDirsPsr4 = array (
-        'Models\\' => 
+        'Core\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/App/Models',
+            0 => __DIR__ . '/../..' . '/Core',
         ),
         'App\\' => 
         array (
@@ -29,21 +29,25 @@ class ComposerStaticInitd77774c21dc9937ac29ae8a4ad7e29ef
     );
 
     public static $classMap = array (
-        'App\\Http\\Controllers\\Admin\\DashboardController' => __DIR__ . '/../..' . '/App/Http/Controllers/Admin/DashboardController.php',
-        'App\\Http\\Controllers\\Admin\\OrdersController' => __DIR__ . '/../..' . '/App/Http/Controllers/Admin/OrdersController.php',
-        'App\\Http\\Controllers\\MainController' => __DIR__ . '/../..' . '/App/Http/Controllers/MainController.php',
-        'App\\Http\\Helpers\\ImageHelper' => __DIR__ . '/../..' . '/App/Http/Helpers/ImageHelper.php',
-        'Models\\Order' => __DIR__ . '/../..' . '/App/Models/Order.php',
-        'Models\\Product' => __DIR__ . '/../..' . '/App/Models/Product.php',
-        'Models\\User' => __DIR__ . '/../..' . '/App/Models/User.php',
+        'App\\Config' => __DIR__ . '/../..' . '/App/Config.php',
+        'App\\Controllers\\AuthController' => __DIR__ . '/../..' . '/App/Controllers/AuthController.php',
+        'App\\Controllers\\HomeController' => __DIR__ . '/../..' . '/App/Controllers/HomeController.php',
+        'App\\Controllers\\PostsController' => __DIR__ . '/../..' . '/App/Controllers/PostsController.php',
+        'App\\Controllers\\UserController' => __DIR__ . '/../..' . '/App/Controllers/UserController.php',
+        'App\\Helpers\\SessionHelper' => __DIR__ . '/../..' . '/App/Helpers/SessionHelper.php',
+        'App\\Validators\\UserValidator' => __DIR__ . '/../..' . '/App/Validators/UserValidator.php',
+        'Core\\Controller' => __DIR__ . '/../..' . '/Core/Controller.php',
+        'Core\\Model' => __DIR__ . '/../..' . '/Core/Model.php',
+        'Core\\Router' => __DIR__ . '/../..' . '/Core/Router.php',
+        'Core\\View' => __DIR__ . '/../..' . '/Core/View.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd77774c21dc9937ac29ae8a4ad7e29ef::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd77774c21dc9937ac29ae8a4ad7e29ef::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd77774c21dc9937ac29ae8a4ad7e29ef::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc68697e560ccd503a1b2d34bf1ea74f5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc68697e560ccd503a1b2d34bf1ea74f5::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitc68697e560ccd503a1b2d34bf1ea74f5::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -1,7 +1,7 @@
 <?php
 namespace App\Validators;
 
-/*use App\Models\User;*/
+use App\Models\User;
 
 class UserValidator
 {
@@ -39,4 +39,10 @@ class UserValidator
         }
         return false;
     }
+
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+
 }

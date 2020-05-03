@@ -2,6 +2,10 @@
 namespace App\Controllers;
 
 use Core\Controller;
+use Core\View;
+use App\Helpers\SessionHelper;
+use App\Models\User;
+
 
 class AuthController extends Controller
 {

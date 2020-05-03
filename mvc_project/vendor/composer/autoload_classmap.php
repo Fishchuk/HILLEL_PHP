@@ -6,11 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Http\\Controllers\\Admin\\DashboardController' => $baseDir . '/App/Http/Controllers/Admin/DashboardController.php',
-    'App\\Http\\Controllers\\Admin\\OrdersController' => $baseDir . '/App/Http/Controllers/Admin/OrdersController.php',
-    'App\\Http\\Controllers\\MainController' => $baseDir . '/App/Http/Controllers/MainController.php',
-    'App\\Http\\Helpers\\ImageHelper' => $baseDir . '/App/Http/Helpers/ImageHelper.php',
-    'Models\\Order' => $baseDir . '/App/Models/Order.php',
-    'Models\\Product' => $baseDir . '/App/Models/Product.php',
-    'Models\\User' => $baseDir . '/App/Models/User.php',
+    'App\\Config' => $baseDir . '/App/Config.php',
+    'App\\Controllers\\AuthController' => $baseDir . '/App/Controllers/AuthController.php',
+    'App\\Controllers\\HomeController' => $baseDir . '/App/Controllers/HomeController.php',
+    'App\\Controllers\\PostsController' => $baseDir . '/App/Controllers/PostsController.php',
+    'App\\Controllers\\UserController' => $baseDir . '/App/Controllers/UserController.php',
+    'App\\Helpers\\SessionHelper' => $baseDir . '/App/Helpers/SessionHelper.php',
+    'App\\Validators\\UserValidator' => $baseDir . '/App/Validators/UserValidator.php',
+    'Core\\Controller' => $baseDir . '/Core/Controller.php',
+    'Core\\Model' => $baseDir . '/Core/Model.php',
+    'Core\\Router' => $baseDir . '/Core/Router.php',
+    'Core\\View' => $baseDir . '/Core/View.php',
 );

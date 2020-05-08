@@ -2,7 +2,7 @@
 \Core\View::render('parts/header.php', ['title' => 'Create Post']);
 ?>
 
-<div class="wrapper back">
+<div class="wrapper ">
     <div class="container ">
         <h2 class="forma_reg">Login</h2>
         <?php if(!empty($_SESSION['errors']['login']['common'])): ?>

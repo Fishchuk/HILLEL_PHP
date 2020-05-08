@@ -1,7 +1,7 @@
 <?php
 \Core\View::render('parts/header.php', ['title' => 'Create Post']);
 ?>
-<div class="wrapper back">
+<div class="wrapper">
     <div class="container ">
         <h2 class="forma_reg">Create An Account</h2>
 

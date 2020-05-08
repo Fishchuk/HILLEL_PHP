@@ -19,7 +19,7 @@ class UserValidator
         'email'     => '/^[a-zA-Z0-9.!#$%&\'*+\/\?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i',
         'password'  => '/[a-zA-Z0-9.!#$%&\'*+\/\?^_`{|}~-]{8,}/',
     ];
-    public function storeValidate(array $fields): bool
+    public function storeValidate(array $fields)
     {
         foreach ($fields as $key => $field){
             if(preg_match($this->rules[$key],$field)){
@@ -40,7 +40,7 @@ class UserValidator
         return false;
     }
 
-    public function getErrors(): array
+    public function getErrors():array
     {
         return $this->errors;
     }

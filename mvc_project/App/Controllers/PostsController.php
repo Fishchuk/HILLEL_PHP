@@ -1,9 +1,14 @@
 <?php
 namespace App\Controllers;
 
+use App\Helpers\SessionHelper;
+use App\Validators\Posts\CreatePostValidator;
 use App\Models\Post;
 use Core\Controller;
 use Core\View;
+use App\Helpers\FileHelper;
+
+
 class PostsController extends Controller
 {
     public function index()
@@ -13,31 +18,39 @@ class PostsController extends Controller
 
     public function create()
     {
+        $this->before();
         View::render('posts/create.php');
 
     }
 
     public function store()
     {
-        if(empty($_POST['title'])){
-            $this->validation = false;
-            $this->data =[
+        $this->before();
+        if($_FILES['image']['error'] !==0 ) {
+            $_SESSION['data'] =[
                 'data' => $_POST,
-                'title_error'=>'Title should not be empty!'
+                'title_error' => 'The post should contain an image'
             ];
+            siteRedirect('posts/create');
         }
+        $fields = filter_input_array(INPUT_POST, $_POST, 1);
 
-        if(!$this->validation){
-            View::render('posts/create.php', $this->data);
+
+        $validator = new CreatePostValidator();
+        $fileHelper = new FileHelper();
+
+        if(!$validator->validate($fields)){
+           $_SESSION = $validator->getErrors();
+           siteRedirect('posts/create');
         }
-        $modelData = [
-            'title' => $_POST['title'],
-            'content' => !empty($_POST['content']) ? $_POST['content'] : ''
-        ];
+        $imagePath = $fileHelper->upload($_FILES['image']);
+        $fields['image'] = $imagePath;
+        $fields['user_id'] = SessionHelper::getUserId();
+
         $post = new Post();
-        $postId = $post->insert($modelData);
+        $id = $post->insert($fields);
+        siteRedirect("posts/" . $id);
 
-        siteRedirect("posts/" . $postId);
     }
 
     public function show(int $id)
@@ -46,5 +59,16 @@ class PostsController extends Controller
         $post = $postModel->getPost($id);
 
         View::render('posts/show.php', ['post' => $post]);
+    }
+    protected function before()
+    {
+        parent::before();
+        if (!SessionHelper::isUserLoggedIn()){
+            $_SESSION['notification'] = [
+                'type' => 'info',
+                'message'=>'You should be authorized for this action!'
+            ];
+            siteRedirect();
+        }
     }
 }

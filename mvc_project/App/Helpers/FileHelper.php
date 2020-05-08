@@ -4,7 +4,7 @@ namespace App\Helpers;
 class FileHelper
 {
   protected $uploadsDir = 'images/';
-  public function upload(array $file):string
+  public function upload(array $file): string
   {
       $userId = SessionHelper::getUserId();
       $folders = $this->uploadsDir . "{$userId}/";

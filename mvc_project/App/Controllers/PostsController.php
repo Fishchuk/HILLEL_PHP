@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Helpers\SessionHelper;
+use App\Models\User;
 use App\Validators\Posts\CreatePostValidator;
 use App\Models\Post;
 use Core\Controller;
@@ -56,9 +57,11 @@ class PostsController extends Controller
     public function show(int $id)
     {
         $postModel = new Post();
-        $post = $postModel->getPost($id);
+        $post = $postModel->getPostById($id);
+        $userModel = new User();
+        $user = $userModel->getUserById($post['user_id']);
 
-        View::render('posts/show.php', ['post' => $post]);
+        View::render('posts/show.php', ['post' => $post, 'user' => $user]);
     }
     protected function before()
     {

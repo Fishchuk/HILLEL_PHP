@@ -30,4 +30,13 @@ class User extends Model
 
         return !empty($user) ? $user : false;
     }
+    public function getUserById(int $id)
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE id= :id ";
+        $sth = $this->db->prepare($sql);
+        $sth->execute([':id' => $id]);
+        $user = $sth->fetch(PDO::FETCH_ASSOC);
+
+        return !empty($user) ? $user : false;
+    }
 }

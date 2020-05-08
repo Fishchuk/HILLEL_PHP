@@ -19,11 +19,19 @@ class Post extends \Core\Model
         return $this->db->lastInsertId();
     }
 
-    public function getPost(int $id)
+    public function getPostById(int $id)
     {
         $sql = "SELECT * FROM {$this->tableName} WHERE id=:id";
         $sth = $this->db->prepare($sql);
         $sth->execute([':id' => $id]);
+        $post = $sth->fetch(PDO::FETCH_ASSOC);
+        return !empty($post) ? $post : false;
+    }
+    public function all(): array
+    {
+        $sql = "SELECT * FROM {$this->tableName} ORDER BY created_at DESC";
+        $sth = $this->db->prepare($sql);
+        $sth->execute();
         $post = $sth->fetch(PDO::FETCH_ASSOC);
         return !empty($post) ? $post : false;
     }

@@ -3,7 +3,7 @@ namespace Core;
 
 
 
- class Validator
+abstract class Validator
 {
     protected $errors = [];
 
@@ -16,6 +16,7 @@ namespace Core;
                  unset($this->errors["{$key}_error"]);
              }
          }
+         return empty($this->errors);
      }
 
 

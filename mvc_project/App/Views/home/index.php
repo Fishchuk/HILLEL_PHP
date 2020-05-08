@@ -1,26 +1,23 @@
 <?php
 \Core\View::render('parts/header.php', ['title' => 'HomePage']);
 ?>
+ <div class="wrapper">
 <div class="container">
     <div class ="row">
+        <?php if (!empty($posts)): ?>
+           <?php foreach ($posts as $post) : ?>
         <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details</a> </p>
+            <h2><?php echo $post['title'] ?></h2>
+            <p><?php echo substr($post['content'], 0, 150); ?></p>
+            <p><a class="btn btn-secondary" href="<?php echo SITE_URL . '/posts' . $post['id']?>" role="button">View details</a> </p>
         </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details</a> </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details</a> </p>
-        </div>
+         <?php endforeach; ?>
+       <?php endif; ?>
+
     </div>
     <hr>
 
 </div>
+    </div>
 <?php
 \Core\View::render('parts/footer.php');?>

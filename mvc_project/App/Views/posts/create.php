@@ -1,8 +1,12 @@
 <?php
 \Core\View::render('parts/header.php', ['title' => 'Create Post']);
-if (!empty($_SESSION['data'])){
-    extract( $_SESSION['data']);
-    unset($_SESSION['data']);
+if(!empty(($_SESSION)['posts_create'])){
+    extract($_SESSION['posts_create']);
+    if (!empty($_SESSION['posts_create']['data'])){
+        extract( $_SESSION['posts_create']);
+    }
+
+    unset($_SESSION['posts_create']);
 }
 ?>
 <div class="wrapper ">

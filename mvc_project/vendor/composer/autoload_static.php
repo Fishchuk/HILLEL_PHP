@@ -34,12 +34,18 @@ class ComposerStaticInitc68697e560ccd503a1b2d34bf1ea74f5
         'App\\Controllers\\HomeController' => __DIR__ . '/../..' . '/App/Controllers/HomeController.php',
         'App\\Controllers\\PostsController' => __DIR__ . '/../..' . '/App/Controllers/PostsController.php',
         'App\\Controllers\\UserController' => __DIR__ . '/../..' . '/App/Controllers/UserController.php',
+        'App\\Helpers\\FileHelper' => __DIR__ . '/../..' . '/App/Helpers/FileHelper.php',
         'App\\Helpers\\SessionHelper' => __DIR__ . '/../..' . '/App/Helpers/SessionHelper.php',
+        'App\\Models\\Post' => __DIR__ . '/../..' . '/App/Models/Post.php',
+        'App\\Models\\User' => __DIR__ . '/../..' . '/App/Models/User.php',
+        'App\\Validators\\Posts\\CreatePostValidator' => __DIR__ . '/../..' . '/App/Validators/Posts/CreatePostValidator.php',
         'App\\Validators\\UserValidator' => __DIR__ . '/../..' . '/App/Validators/UserValidator.php',
         'Core\\Controller' => __DIR__ . '/../..' . '/Core/Controller.php',
         'Core\\Model' => __DIR__ . '/../..' . '/Core/Model.php',
         'Core\\Router' => __DIR__ . '/../..' . '/Core/Router.php',
+        'Core\\Validator' => __DIR__ . '/../..' . '/Core/Validator.php',
         'Core\\View' => __DIR__ . '/../..' . '/Core/View.php',
+        'PHPGangsta_GoogleAuthenticator' => __DIR__ . '/..' . '/phpgangsta/googleauthenticator/PHPGangsta/GoogleAuthenticator.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

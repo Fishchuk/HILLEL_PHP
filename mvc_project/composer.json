@@ -2,7 +2,8 @@
     "name": "admingo/vendor",
     "require": {
 	"ext-pdo": "*",
-      "ext-http": "*"
+      "ext-http": "*",
+        "phpgangsta/googleauthenticator": "dev-master"
 	},
 	"autoload": {
         "psr-4": {

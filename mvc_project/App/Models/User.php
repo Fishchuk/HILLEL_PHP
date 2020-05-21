@@ -39,4 +39,31 @@ class User extends Model
 
         return !empty($user) ? $user : false;
     }
+    public function updateUserPassword(array $fields, int $userId)
+    {
+
+
+        $sql = "UPDATE {$this->tableName} SET password =  :password WHERE id = :id";
+        $fields['password'] = password_hash($fields['password'], PASSWORD_DEFAULT);
+        $sth = $this->db->prepare($sql);
+        $sth->execute($fields);
+        $user = $sth->fetch(PDO::FETCH_ASSOC);
+
+
+    }
+    public function update(int $userId, array $userData)
+    {
+        $userData['id'] = $userId;
+        $sql = "UPDATE {$this->tableName} SET first_name = :first_name, last_name = :last_name, email = :email WHERE id = :id";
+        $sth = $this->db->prepare($sql);
+        return $sth->execute($userData);
+    }
+    public function storeUserSecret(int $id, string $secret)
+    {
+        $sql = "UPDATE users SET secret_code = :secret WHERE id = :id";
+        $sth = $this->db->prepare($sql);
+        $sth->bindValue(':secret', $secret, PDO::PARAM_STR);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+    }
 }

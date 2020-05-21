@@ -10,7 +10,7 @@
            <?php echo $_SESSION['errors']['login']['common']; ?>
         </div>
          <?php endif; ?>
-        <form  method="POST" action="/auth" >
+        <form  method="POST" action="/verify" >
 
             <div class="form-row">
                 <div class="form-group col-md-6">

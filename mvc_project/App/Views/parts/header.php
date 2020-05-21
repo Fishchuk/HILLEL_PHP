@@ -32,6 +32,12 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="/logout">Logout </a>
                             </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/account">User Account </a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="account/password">Change Password </a>
+                                </li>
                             <?php else: ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="/login">Login</a>

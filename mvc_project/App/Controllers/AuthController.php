@@ -5,6 +5,7 @@ use Core\Controller;
 use Core\View;
 use App\Helpers\SessionHelper;
 use App\Models\User;
+use PHPGangsta_GoogleAuthenticator;
 
 
 class AuthController extends Controller
@@ -27,8 +28,11 @@ class AuthController extends Controller
 
         if($userData = $user->getUserByEmail($fields['email'])){
             if(password_verify($fields['password'], $userData['password'])){
-                SessionHelper::setUserData('id', $userData['id']);
-                siteRedirect('home');
+               $_SESSION['2auth'] = [
+                   'user_id' => $userData['id'],
+                   'secret' => !empty($userData['secret_code']) ? $userData['secret_code'] : null
+               ];
+               siteRedirect('2auth-verification');
             }else{
                 $_SESSION['errors']['login']['common'] = 'The password is not valid';
             }
@@ -36,6 +40,43 @@ class AuthController extends Controller
             $_SESSION['errors']['login']['common'] = 'The user with email "'.$fields['email'] . '" not exists';
         }
         siteRedirect('login');
+    }
+    public function showQrCode()
+    {
+        if (!empty($_SESSION['qr']['qrCodeUrl'])){
+            View::render('auth/qr-code.php', ['qrCodeUrl' => $_SESSION['qr']['qrCodeUrl']]);
+            exit;
+        }
+        siteRedirect('login');
+        /*$ga = new PHPGangsta_GoogleAuthenticator();
+        $secret = $ga->createSecret();
+
+        $qrCodeUrl = $ga->getQRCodeGoogleUrl('Blog', $secret);
+        */
+    }
+    public function show2Auth()
+    {
+        if (!empty($_SESSION['2auth'])){
+            View::render('/auth/check-2auth.php');
+            exit;
+        }
+        siteRedirect('login');
+    }
+    public function verifyAuth()
+    {
+        $fields = filter_input_array(INPUT_POST,$_POST, 1);
+        $session = $_SESSION['2auth'];
+        unset($_SESSION['2auth']);
+        if (!is_null($session['secret']) && !empty($session['user_id']) && !empty($fields['code'])){
+            $ga = new PHPGangsta_GoogleAuthenticator();
+            $checkResult = $ga->verifyCode($session['secret'], $fields['code'], 2);
+
+            if ($checkResult){
+                SessionHelper::setUserData('id', $session['user_id']);
+                siteRedirect();
+            }
+        }
+          siteRedirect('login');
     }
 
     public function logout()

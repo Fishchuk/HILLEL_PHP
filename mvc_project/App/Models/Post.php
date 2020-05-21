@@ -19,6 +19,25 @@ class Post extends \Core\Model
         return $this->db->lastInsertId();
     }
 
+    public function update(int $postId, array $postData)
+    {
+        $postData['id'] = $postId;
+        $sql = "UPDATE {$this->tableName} SET title = :title, content = :content, image = :image WHERE id = :id";
+        $sth = $this->db->prepare($sql);
+        return $sth->execute($postData);
+    }
+
+    public function getPostsByAuthorId(int $userId): array
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE user_id = :user_id";
+        $sth = $this->db->prepare($sql);
+        $sth->bindValue('user_id', $userId, PDO::PARAM_INT);
+        $sth->execute();
+        $posts = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+        return !empty($posts) ? $posts : [];
+    }
+
     public function getPostById(int $id)
     {
         $sql = "SELECT * FROM {$this->tableName} WHERE id=:id";
@@ -32,7 +51,14 @@ class Post extends \Core\Model
         $sql = "SELECT * FROM {$this->tableName} ORDER BY created_at DESC";
         $sth = $this->db->prepare($sql);
         $sth->execute();
-        $post = $sth->fetch(PDO::FETCH_ASSOC);
+        $post = $sth->fetchAll(PDO::FETCH_ASSOC);
         return !empty($post) ? $post : false;
+    }
+    public function removePostById(int $id)
+    {
+        $sql = "DELETE FROM {$this->tableName} WHERE id= :id";
+        $sth = $this->db->prepare($sql);
+
+        return $sth->execute([':id' => $id]);
     }
 }

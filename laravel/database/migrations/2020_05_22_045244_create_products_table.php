@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->float('price');
             $table->integer('discount')->default(0);
             $table->unsignedBigInteger('quantity')->default(0);
-            $table->string('thumbnail');
+
         });
     }
 

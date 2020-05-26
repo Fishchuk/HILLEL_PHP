@@ -25,7 +25,7 @@ class CreateOrdersTable extends Migration
             $table->string('address');
             $table->float('total');
             $table->unsignedBigInteger('status_id');
-            $table->string('type')->unique();
+
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')

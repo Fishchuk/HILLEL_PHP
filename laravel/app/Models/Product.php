@@ -6,7 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['id','SKU','name','description','small_description','price','discount','quantity'];
+    protected $fillable = [
+        'id',
+        'SKU',
+        'name',
+        'description',
+        'small_description',
+        'price',
+        'discount',
+        'quantity',
+        'thumbnail'
+    ];
 
     public function categories()
     {
@@ -16,10 +26,7 @@ class Product extends Model
     {
         return $this->belongsToMany(\App\Models\Order::class)->withPivot('quantity','price');
     }
-    public function thumbnail()
-    {
-        return $this->morphOne(\App\Models\Image::class,'imageadle');
-    }
+
     public function image()
     {
         return $this->morphMany(\App\Models\Image::class, 'imageadle');

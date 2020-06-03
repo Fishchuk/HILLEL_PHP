@@ -11,9 +11,8 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Order::class,5)->create()->each(function ($order){
-            $order->user()->associate(\App\Models\User::get()->random());
-        });
+        factory(\App\Models\Order::class,10)->create();
+
     }
 }
 //Здесь нужно ещё связать с продуктами

@@ -16,7 +16,7 @@ class OrdersStatusesTableSeeder extends Seeder
             foreach ($orderStatuses as $orderStatus){
                 $createStatus[] =['type' =>$orderStatus];
             }
-            DB::table('orders_statuses')->insert($createStatus);
+            DB::table('order_statuses')->insert($createStatus);
         }
     }
 }

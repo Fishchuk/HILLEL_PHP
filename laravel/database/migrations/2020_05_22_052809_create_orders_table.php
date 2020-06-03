@@ -32,7 +32,7 @@ class CreateOrdersTable extends Migration
                 ->on('users');
             $table->foreign('status_id')
                 ->references('id')
-                ->on('orders_statuses');
+                ->on('order_statuses');
         });
     }
 

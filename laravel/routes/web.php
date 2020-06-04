@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::middleware('auth','admin')->prefix('admin')->name('admin.')->group(function (){
+/*Route::middleware('auth','admin')->prefix('admin')->name('admin.')->group(function (){
     Route::get('/','Admin@index')->name('dashboard');
     Route::prefix('products')->name('products.')->group(function (){
         Route::put('/{id}','ProductController@create')->name('create');
@@ -48,3 +48,4 @@ Route::middleware('auth','admin')->prefix('admin')->name('admin.')->group(functi
         Route::delete('/{id}','UsersController@destroy')->name('destroy');
     });
 });
+*/

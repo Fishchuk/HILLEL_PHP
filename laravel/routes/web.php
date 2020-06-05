@@ -17,10 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-/*Route::middleware('auth','admin')->prefix('admin')->name('admin.')->group(function (){
-    Route::get('/','Admin@index')->name('dashboard');
-    Route::prefix('products')->name('products.')->group(function (){
+
+Route::middleware(['auth','admin'])->prefix('admin')->namespace('Admin')->name('admin.')->group(function (){
+    Route::get('/dashboard','DashboardController@index')->name('dashboard');
+
+    Route::resource('categories', 'CategoriesController')->except(['show']);
+});
+ /*   Route::prefix('products')->name('products.')->group(function (){
         Route::put('/{id}','ProductController@create')->name('create');
         Route::get('/','ProductController@index')->name('index');
         Route::post('/','ProductController@store')->name('store');

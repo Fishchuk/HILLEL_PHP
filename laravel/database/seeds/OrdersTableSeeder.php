@@ -11,11 +11,18 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Order::class,10)->create();
+        factory(\App\Models\Order::class,10)->create()->each(function (\App\Models\Order $order){
+            $countOfProduct = rand(1,3);
+            for($i=0; $i< $countOfProduct;$i++){
+                $quantity = rand(1,10);
+                $product = \App\Models\Product::all()->random();
+                $product->orders()->updateExistingPivot($order, [
+                    'quantity' => $quantity,
+                    'price'  => $product->price
+                ]);
+            }
+        });
 
     }
 }
-//Здесь нужно ещё связать с продуктами
-//как-то так: each(function ($order){
-//            $order->products()->attach(\App\Models\Product::get()->random());
-//но как правильно записать не знаю!
+

@@ -16,7 +16,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id','name','surname', 'email','phone', 'password','birth_date'
+        'id',
+        'role_id',
+        'name',
+        'surname',
+        'email',
+        'phone',
+        'password',
+        'birth_date'
+
     ];
 
     /**
@@ -47,5 +55,13 @@ class User extends Authenticatable
     public function image()
     {
         return $this->morphOne(\App\Models\Image::class, 'imageadle');
+    }
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = \Hash::make($password);
+    }
+    public function getIsAdminAttribute()
+    {
+        return $this->role->name === config('roles.admin');
     }
 }

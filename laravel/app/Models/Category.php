@@ -15,4 +15,9 @@ class Category extends Model
      {
          return $this->morphOne(\App\Models\Image::class, 'imageadle');
      }
+     public function getShortDescriptionAttribute()
+     {
+         $more = strlen($this->description)>100 ? '...' : '';
+         return substr($this->description, 0, 100). $more;
+     }
 }

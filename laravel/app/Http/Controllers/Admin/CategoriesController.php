@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -45,8 +46,19 @@ class CategoriesController extends Controller
              'title' => $request->get('title'),
              'description' => $request->get('description')
          ]);
+        if (!empty($request->file('image'))){
+            $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
+            $filePath = $imageService->upload($request->file('image'));
+            $newCategory->image()
+                ->create([
+                    'path' => $filePath
+                ]);
+        }
 
-         return redirect(route('admin.categories.index'))->with(['status' => 'The category has been created!']);
+
+
+         return redirect(route('admin.categories.index'))
+             ->with(['status' => 'The category has been created!']);
     }
 
 

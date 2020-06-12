@@ -13,7 +13,7 @@ class Category extends Model
      }
      public function image()
      {
-         return $this->morphOne(\App\Models\Image::class, 'imageadle');
+         return $this->morphOne(\App\Models\Image::class, 'imageable');
      }
      public function getShortDescriptionAttribute()
      {

@@ -11,7 +11,7 @@ interface ImageServiceInterface
     /**
      * @param string $file
      */
-    public function upload(UploadedFile $file);
+    public function upload(UploadedFile $file): string;
 
     /**
      * @param string $file

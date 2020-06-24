@@ -19,7 +19,7 @@ class CategoriesController extends Controller
     public function index()
 
     {
-        $categories = Category::paginate(5);
+        $categories = Category::withCount('products')->paginate(5);
         return view('admin/categories/index', compact('categories'));
     }
 
@@ -69,8 +69,13 @@ class CategoriesController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Category $category)
+
     {
-        return view('admin.categories.edit', compact('category'));
+        $image = array();
+        if ($category->image()->exists()){
+            $image = $category->image()->first()->toArray();
+        }
+        return view('admin.categories.edit', compact('category', 'image'));
     }
 
     /**
@@ -87,6 +92,32 @@ class CategoriesController extends Controller
             'description' => $request->get('description')
         ]);
 
+        if (!empty($request->file('image'))){
+            $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
+            $filePath = $imageService->upload($request->file('image'));
+            $oldImage = $category->image()->first();
+
+            if(!is_null($oldImage)){
+                $imageService->remove($oldImage->path);
+            }
+
+            if (is_null($oldImage)){
+                $category->image()
+                    ->create([
+                        'path' => $filePath
+                    ]);
+
+            }else{
+                $category->image()
+                    ->update([
+                        'path' => $filePath
+                    ]);
+            }
+
+
+        }
+
+
         return redirect(route('admin.categories.index'))
             ->with(['status' => 'The category was successfully updated!']);
     }
@@ -94,11 +125,17 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        $category->image()->delete();
+
+
+        return  redirect(route('admin.categories.index'))
+            ->with(['status' => 'The category was successfully removed!']);
     }
 }

@@ -11,9 +11,14 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">{{__('Title')}}</th>
-                        <th scope="col">{{__('Description')}}</th>
-                        <th scope="col">{{__('Products Count')}}</th>
+                        <th scope="col">{{__('User Name')}}</th>
+                        <th scope="col">{{__('User Surname')}}</th>
+                        <th scope="col">{{__('User Email')}}</th>
+                        <th scope="col">{{__('User Phone')}}</th>
+                        <th scope="col">{{__('Country')}}</th>
+                        <th scope="col">{{__('City')}}</th>
+                        <th scope="col">{{__('Address')}}</th>
+                        <th scope="col">{{__('Total')}}</th>
                         <th class="text-center" scope="col">{{__('Action')}}</th>
                     </tr>
                     </thead>
@@ -22,7 +27,7 @@
 
                     </tbody>
                 </table>
-                {{$categories->links()}}
+                {{$orders->links()}}
             </div>
         </div>
     </div>

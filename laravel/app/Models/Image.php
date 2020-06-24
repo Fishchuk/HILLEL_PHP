@@ -17,4 +17,8 @@ class Image extends Model
     {
         return $this->morphToMany(\App\Models\Product::class, 'imageable');
     }
+    public function categories()
+    {
+        return $this->morphToMany(\App\Models\Category::class, 'imageable');
+    }
 }

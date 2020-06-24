@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Update Category</div>
+                    <div class="card-header">Update Order</div>
 
                     <div class="card-body">
                         @if ($errors->any())
@@ -18,7 +18,7 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="{{ route('admin.categories.update', $category) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.orders.update', $category) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -41,22 +41,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row" style="display: flex; flex-direction: column;align-items: center;justify-content: center" >
-                                @if(!empty($image))
-                                    <img src="{{Storage::disk('public')->url($image['path'])}}" height="200" width="300"/>
-                                @endif
-                                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="image"
-                                           type="file"
-                                           class="form-control "
-                                           name="image"
-
-                                    >
-
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 

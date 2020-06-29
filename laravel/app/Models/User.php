@@ -64,4 +64,13 @@ class User extends Authenticatable
     {
         return $this->role->name === config('roles.admin');
     }
+    public function instanceCartName()
+    {
+        $userName=[
+            $this->id,
+            $this->name,
+            $this->surname
+        ];
+        return implode('_', $userName);
+    }
 }

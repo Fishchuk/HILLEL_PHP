@@ -52,7 +52,10 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('cart.index') }}">{{ __('Cart') }}</a>
+                                <a class="nav-link btn btn-success" href="{{ route('cart.index') }}">
+                                    {{ __('Cart') }}
+                                    <span style="margin-left: 6px;" class="badge badge-light">{{Cart::instance('cart')->content()->count()}}</span>
+                                </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

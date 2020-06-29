@@ -19,10 +19,10 @@
                                   </tr>
                                   </thead>
                                   <tboby>
-                                      @foreach($categories as $category)
+                                      @foreach($errors as $category)
                                           <tr>
                                               <td class="text-center">
-                                                  @include('categories.perts.category_view',['category'=>$category])</td>
+                                                  @include('categories.parts.category_view',['category'=>$category])</td>
                                               <td class="text-center">{{$category->products_count}}</td>
                                           </tr>
                                       @endforeach
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-                {{$categories->links()}}
+                {{$errors->links()}}
             </div>
 
         </div>

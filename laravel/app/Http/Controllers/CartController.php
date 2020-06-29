@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Gloudemans\Shoppingcart\Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -26,12 +26,19 @@ class CartController extends Controller
     public function update(Request $request, Product $product)
     {
         if ($request->product_count > $product->quantity){
-            return redirect()->back()->with(['status'=> "Product count should be less then {$product->quantity}"]);
+            return redirect()->back()->with(['customError'=> "Product count should be less then {$product->quantity}"]);
         }
+        Cart::instance('cart')->update(
+            $request->rowId,
+            $request->product_count
+        );
+
+        return redirect()->back()->with(['status'=> "The product \"{$product->name} \" count was updated!"]);
 
     }
-    public function delete()
+    public function delete(Request $request, Product $product)
     {
-
+        Cart::instance('cart')->remove($request->rowId);
+        return redirect()->back()->with(['status'=> "The product \"{$product->name} \" count was deleted!"]);
     }
 }

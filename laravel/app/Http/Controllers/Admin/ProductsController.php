@@ -137,7 +137,7 @@ class ProductsController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        $product->images()->delete();
+       // $product->images()->delete();
 
 
         return  redirect(route('admin.products.index'))

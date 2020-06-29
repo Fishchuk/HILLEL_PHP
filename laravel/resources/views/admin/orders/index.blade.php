@@ -23,9 +23,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @each('admin.categories.parts.category_row', $categories, 'category')
+                    @each('admin.orders.parts.order_row', $orders, 'order')
 
                     </tbody>
+
                 </table>
                 {{$orders->links()}}
             </div>

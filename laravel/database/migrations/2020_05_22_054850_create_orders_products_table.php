@@ -15,7 +15,7 @@ class CreateOrdersProductsTable extends Migration
     {
         Schema::create('orders_products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('quantity');
             $table->float('price');
@@ -24,7 +24,8 @@ class CreateOrdersProductsTable extends Migration
                 ->on('products');
             $table->foreign('order_id')
                 ->references('id')
-                ->on('orders');
+                ->on('orders')
+                ->onDelete('set null');
         });
     }
 

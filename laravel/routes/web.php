@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController');
 
 Auth::routes();
 
@@ -29,34 +27,19 @@ Route::middleware(['auth','admin'])->prefix('admin')->namespace('Admin')->name('
 
     Route::resource('products', 'ProductsController')->except(['show']);
 
-   // Route::resource('orders', 'OrdersController')->only(['index', 'edit', 'update']);
+    Route::resource('orders', 'OrdersController')->only(['index', 'edit', 'update']);
 });
- /*   Route::prefix('products')->name('products.')->group(function (){
-        Route::put('/{id}','ProductController@create')->name('create');
-        Route::get('/','ProductController@index')->name('index');
-        Route::post('/','ProductController@store')->name('store');
-        Route::put('/{id}','ProductController@update')->name('update');
-        Route::delete('/{id}','ProductController@destroy')->name('destroy');
-    });
-    Route::prefix('orders')->name('orders.')->group(function (){
-        Route::put('/{id}','OrdersController@create')->name('create');
-        Route::get('/','OrdersController@index')->name('index');
-        Route::post('/','OrdersController@store')->name('store');
-        Route::put('/{id}','OrdersController@update')->name('update');
-        Route::delete('/{id}','OrdersController@destroy')->name('destroy');
-    });
-    Route::prefix('categories')->name('categories.')->group(function (){
-        Route::put('/{id}','CategoriesController@create')->name('create');
-        Route::get('/','CategoriesController@index')->name('index');
-        Route::post('/', 'CategoriesController@show')->name('store');
-        Route::get('/{id}/edit', 'CategoriesController@edit')->name('edit');
-        Route::put('/{id}','CategoriesController@update')->name('update');
-        Route::delete('/{id}','CategoriesController@destroy')->name('destroy');
-    });
-    Route::prefix('users')->name('users.')->group(function (){
-        Route::get('/','UsersController@index')->name('index');
-        Route::get('{id}', 'UsersController@show')->name('show');
-        Route::delete('/{id}','UsersController@destroy')->name('destroy');
-    });
+Route::resource('categories','CategoriesController');
+
+Route::resource('products', 'ProductsController');
+
+Route::middleware(['auth'])->group(function (){
+    Route::get('cart','CartController@index')->name('cart.index');
+    Route::post('cart/{product}/add','CartController@add')->name('cart.add');
+    Route::post('cart/{product}/count/update','CartController@update')->name('cart.count.update');
+    Route::post('cart/{product}/delete','CartController@delete')->name('cart.delete');
+
 });
-*/
+
+
+

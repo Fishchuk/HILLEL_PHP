@@ -12,7 +12,7 @@
         <td>{{$order->total}}</td>
         <td>
             <div style="display: flex; flex-direction: row;align-items: center;justify-content: center">
-                <a href="{{route('admin.orders.edit', $category)}}"class="btn btn-warning"style="margin-right: 12px">Edit</a>
+                <a href="{{route('admin.orders.edit', $order)}}"class="btn btn-warning"style="margin-right: 12px">Edit</a>
 
             </div>
         </td>

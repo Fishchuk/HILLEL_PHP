@@ -1,6 +1,6 @@
 <?php
 return[
-    'paid' => 'Paid',
     'in_process' => 'In process',
+    'paid' => 'Paid',
     'shipped' => 'Shipped'
 ];

@@ -8,6 +8,7 @@ class Order extends Model
 {
     protected $fillable = [
         'id',
+        'user_id',
         'user_name',
         'user_surname',
         'user_email',
@@ -15,7 +16,8 @@ class Order extends Model
         'country',
         'city',
         'address',
-        'total'
+        'total',
+        'status_id'
         ];
     public function status()
     {
@@ -28,6 +30,6 @@ class Order extends Model
     }
     public function products()
     {
-        return $this->hasMany(\App\Models\Product::class)->withPivot('quantity','price');
+        return $this->belongsToMany(\App\Models\Product::class,'order_products');
     }
 }

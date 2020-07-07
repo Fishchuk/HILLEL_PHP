@@ -33,6 +33,12 @@ Route::resource('categories','CategoriesController');
 
 Route::resource('products', 'ProductsController');
 
+Route::get('checkout','CheckoutController')->name('checkout');
+Route::post('orders/create','OrdersController')->name('orders.create');
+Route::get('thankyou/{order}', function ($order){
+    return view('checkout/thankyou', compact('order'));
+})->name('thankyou');
+
 Route::middleware(['auth'])->group(function (){
     Route::get('cart','CartController@index')->name('cart.index');
     Route::post('cart/{product}/add','CartController@add')->name('cart.add');

@@ -107,10 +107,36 @@ $(document).ready(function () {
   });
   $(document).on('click', classes.removeBtn, function (e) {
     e.preventDefault();
-    var parent = $(this).parents(classes.row);
 
-    if (parent) {
-      parent.remove();
+    if ($(this).hasClass('ajax')) {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      var route = $(this).data('route');
+      var $btn = $(this);
+      $.ajax({
+        url: route,
+        type: "DELETE",
+        dataType: 'json',
+        success: function success(data) {
+          var parent = $btn.parents(classes.row);
+          parent.html(data.message);
+          setTimeout(function (parent) {
+            parent.remove();
+          }, 2000, parent);
+        },
+        error: function error(data) {
+          console.log('Error:', data);
+        }
+      });
+    } else {
+      var parent = $(this).parents(classes.row);
+
+      if (parent) {
+        parent.remove();
+      }
     }
   });
 });

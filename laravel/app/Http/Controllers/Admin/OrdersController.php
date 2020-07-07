@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -21,33 +22,30 @@ class OrdersController extends Controller
     }
 
 
-
-
-
-
-
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Order $order
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Order $order)
     {
-        //
+        $products=$order->products()->get();
+        return view('admin/orders/edit',compact('order','products'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Order $order
+     * @param Product $product
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(Order $order,Product $product)
     {
-        //
+        $order->products()->detach($product->id);
+        return redirect(Route('admin.orders.edit',$order))
+            ->with(['status' => 'The product removed']);
     }
 
 

@@ -45,6 +45,8 @@ Route::middleware(['auth'])->group(function (){
     Route::post('cart/{product}/count/update','CartController@update')->name('cart.count.update');
     Route::delete('cart/{product}/delete','CartController@delete')->name('cart.delete');
 
+    Route::post('rating/{product}/add','RatingController@add')->name('rating.add');
+
 });
 
 

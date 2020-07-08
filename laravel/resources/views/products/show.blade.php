@@ -25,6 +25,7 @@
                 <p>Price: {{$product->printPrice()}}$</p>
                 <p>SKU: {{$product->SKU}}</p>
                 <p>Quantity: {{$product->quantity}}</p>
+                 <p>Rating: {{round($product->averageRating(), 1 )?? 0}}/5 {{ $product->usersRated() >0 ? "({$product->usersRated()})" : '' }}</p>
                 <hr>
                 <div>
                     <p>Product Categories:</p>
@@ -56,22 +57,20 @@
                             </form>
                         </div>
                     @endif
-                 {{--       <form class="form-horizontal postptars" action="{{route('rating.add', $product)}}" id="addStar" method="POST">
+                        <form class="form-horizontal postptars" action="{{route('rating.add', $product)}}" id="addStar" method="POST">
                             @csrf
                             <div class="form-group required">
                                 <div class="col-sm-12">
-                                    @if(!is_null($product->getUserRatingForCurrentProduct()))
+                                    @if($product->getUserProductRating() )
                                         @for($i = 5; $i >= 1;$i--)
                                             <input type="radio"
                                                    class="star star-{{$i}}"
                                                    value="{{$i}}"
                                                    id="star-{{$i}}"
                                                    name="star"
-                                                   {{
-                                                    $i == $product->getUserRatingForCurrentProduct()->rating
-                                                    ? 'checked'
-                                                    : ''
-                                                    }}
+                                                   @if($i == $product->getUserProductRating()) checked="checked" @endif
+
+
                                               >
                                             <label for="star-{{$i}}" class="star star-{{$i}}"></label>
                                         @endfor
@@ -86,13 +85,17 @@
                                         <label for="star-2" class="star star-2"></label>
                                         <input type="radio" class="star star-1" value="1" id="star-1" name="star">
                                         <label for="star-1" class="star star-1"></label>
+
+
+
+
                                     @endif
 
                                 </div>
 
                             </div>
 
-                        </form>--}}
+                        </form>
                         <hr>
                    {{-- @if($wishlist->isUserFollowed($product))
                             <form action="{{route('wishlist.delete', $product)}}" method="POST">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -41,11 +42,23 @@ class OrdersController extends Controller
      * @param Product $product
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Order $order,Product $product)
+    public function update(UpdateOrderRequest $request,Order $order,Product $product)
     {
-        $order->products()->detach($product->id);
-        return redirect(Route('admin.orders.edit',$order))
-            ->with(['status' => 'The product removed']);
+        $order->update([
+            'user_name' => $request->get('user_name'),
+            'user_surname' => $request->get('user_surname'),
+            'user_email' => $request->get('user_email'),
+            'user_phone' => $request->get('user_phone'),
+            'country' => $request->get('country'),
+            'city' => $request->get('city'),
+            'address' => $request->get('address')
+        ]);
+        return redirect(route('admin.orders.index'))
+            ->with(['status' => 'The order was successfully updated!']);
+
+     //   $order->products()->detach($product->id);
+     //   return redirect(Route('admin.orders.edit',$order))
+     //       ->with(['status' => 'The product updated']);
     }
 
 

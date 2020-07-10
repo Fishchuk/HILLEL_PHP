@@ -10,14 +10,23 @@
                 <div class="album py-5 bg-light">
                     <div class="container">
                         <div class="row">
-                            @each('products.parts.product_view', $products, 'product')
+
+                           @include('categories.parts.category_view',['category'=>$category,'products' => $products])
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
-                {{$products->links()}}
+            <div class="col-md-12">
+                <div class="album py-5 bg-light">
+                    <div class="container">
+                        <div class="row">
+
+                            @include('categories.parts.products_show',['category'=>$category,'products' => $products])
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
         </div>
     </div>

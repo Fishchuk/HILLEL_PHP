@@ -60,6 +60,15 @@ class Product extends Model implements Buyable
             ['rateable_id', $this->id]
 
         ])->first();
-        return !is_null($vote->rating) ? $vote->rating : false;
+        return !is_null($vote) ? $vote->rating : false;
+    }
+    public function followers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'wishlist',
+            'product_id',
+            'user_id'
+        );
     }
 }

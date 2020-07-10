@@ -45,6 +45,13 @@ Route::middleware(['auth'])->group(function (){
     Route::post('cart/{product}/count/update','CartController@update')->name('cart.count.update');
     Route::delete('cart/{product}/delete','CartController@delete')->name('cart.delete');
 
+    Route::get('wishlist/{product}/add','WishListController@add')->name('wishlist.add');
+    Route::delete('wishlist/{product}/delete','WishListController@delete')->name('wishlist.delete');
+    Route::get('account/wishlist','WishListController@userList')->name('wishlist.user');
+
+    Route::get('account/index', 'AccountController@index')->name('account.index');
+    Route::post('account/update','AccountController@update')->name('account.update');
+
     Route::post('rating/{product}/add','RatingController@add')->name('rating.add');
 
 });

@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $products = Product::with('category')->where('quantity', '>', '0')->paginate(10);
+        $products = Product::with('category')->paginate(10);
         $categories = Category::all();
         return view('home', compact('products', 'categories'));
     }

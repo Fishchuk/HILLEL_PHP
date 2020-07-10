@@ -3,3 +3,4 @@
    <small>{{__($category->title)}}</small>
 
 </a>
+

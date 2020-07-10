@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-{{--@inject('wishlist', 'App\Services\WishListService' )--}}
+@inject('wishlist', 'App\Services\WishListService' )
 
 @section('content')
     <div class="container">
@@ -97,14 +97,14 @@
 
                         </form>
                         <hr>
-                   {{-- @if($wishlist->isUserFollowed($product))
+                    @if($wishlist->isUserFollowed($product))
                             <form action="{{route('wishlist.delete', $product)}}" method="POST">
                                 @csrf
-                                <input type="submit" class="btn btn-danger" value="Remove">
+                                <input type="submit" class="btn btn-danger" value="Remove from Wish List">
                             </form>
                         @else
                             <a href="{{route('wishlist.add', $product)}} " class="btn btn-success">{{__('Add to Wish List')}}</a>
-                        @endif --}}
+                        @endif
 
                 @else
                     <h5 class="text-center p-3" style="color: red" >{{ __('Please sing in for buying')}}</h5>

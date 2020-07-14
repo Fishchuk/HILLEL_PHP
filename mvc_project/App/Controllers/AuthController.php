@@ -65,11 +65,11 @@ class AuthController extends Controller
     public function verifyAuth()
     {
         $fields = filter_input_array(INPUT_POST,$_POST, 1);
-        $session = $_SESSION['2auth'];
+        $session = !empty($_SESSION['2auth']) ? $_SESSION['2auth'] :[];
         unset($_SESSION['2auth']);
         if (!is_null($session['secret']) && !empty($session['user_id']) && !empty($fields['code'])){
             $ga = new PHPGangsta_GoogleAuthenticator();
-            $checkResult = $ga->verifyCode($session['secret'], $fields['code'], 2);
+            $checkResult = $ga->verifyCode($session['secret'], $fields['code']);
 
             if ($checkResult){
                 SessionHelper::setUserData('id', $session['user_id']);

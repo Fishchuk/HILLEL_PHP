@@ -11,7 +11,11 @@
                     <div class="container">
                         <div class="row">
 
-                           @include('categories.parts.category_view',['category'=>$category,'products' => $products])
+                            @include('categories.parts.category_view',['category'=>$category,'products' => $products])
+                        </div>
+                        <div class="row">
+
+                            @include('categories.parts.category_description',['category'=>$category,'products' => $products])
                         </div>
                     </div>
                 </div>

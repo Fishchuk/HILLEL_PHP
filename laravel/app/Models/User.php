@@ -53,6 +53,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Order::class);
     }
+    public function comments()
+    {
+        return $this->hasMany(\App\Models\Comment::class);
+    }
     public function image()
     {
         return $this->morphOne(\App\Models\Image::class, 'imageadle');

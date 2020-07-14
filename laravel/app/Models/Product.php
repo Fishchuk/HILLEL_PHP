@@ -40,6 +40,11 @@ class Product extends Model implements Buyable
     {
         return $this->morphMany(\App\Models\Image::class, 'imageable');
     }
+
+    public function comments()
+    {
+        return $this->morphMany(\App\Models\Comment::class, 'commentable');
+    }
     public function getPrice():string
     {
         $price = $this->price;

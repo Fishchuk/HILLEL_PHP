@@ -46,8 +46,9 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
+        $comments = $product->comments()->with('user')->get();
 
-        return view('products.show', compact('product'));
+        return view('products.show', compact('product', 'comments'));
     }
 
     /**

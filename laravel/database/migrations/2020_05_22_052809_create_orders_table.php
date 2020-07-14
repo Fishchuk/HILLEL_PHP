@@ -30,9 +30,12 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+
+
             $table->foreign('status_id')
                 ->references('id')
-                ->on('order_statuses');
+                ->on('order_statuses')
+                ;
         });
     }
 
